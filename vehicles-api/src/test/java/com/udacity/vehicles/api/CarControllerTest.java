@@ -114,6 +114,18 @@ public class CarControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void updateCar() throws Exception {
+        Car car = getCar();
+        car.setCondition(Condition.NEW);
+        mvc.perform(
+                        put(new URI("/cars/1"))
+                                .content(json.write(car).getJson())
+                                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
+    }
+
     /**
      * Tests the deletion of a single car by ID.
      *
